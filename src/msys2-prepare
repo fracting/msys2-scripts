@@ -3,6 +3,8 @@
 set -e
 set -x
 
+. /etc/msys2-env
+
 msys2-install
 msys2-wrapper "echo restart"
 
