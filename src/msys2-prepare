@@ -6,6 +6,6 @@ set -x
 msys2-install
 msys2-wrapper "echo restart"
 msys2-wrapper "pacman -Sy"
-msys2-wrapper "pacman -S --needed msys2-runtime pacman pacman-mirrors"
+msys2-wrapper "pacman -S --needed --noconfirm msys2-runtime pacman pacman-mirrors"
 msys2-wrapper "pacman -Sy"
-msys2-wrapper "pacman -Su"
+msys2-wrapper "pacman -Su --noconfirm"
