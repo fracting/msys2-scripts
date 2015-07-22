@@ -5,11 +5,12 @@ set -x
 
 . /etc/msys2-env
 
+SCRIPT_FILE=typescript
 export MSYSTEM=MSYS
 export WINEDEBUG=fixme-all
 command=$*
-rm -f ${MSYS_ROOT}${HOME}/typescript
+rm -f ${SCRIPT_FILE}
 rm -f exit_code
 (wineconsole $MSYS_ROOT/usr/bin/script.exe -q -f -e -c "/usr/bin/bash.exe -l -e -c \"$command\"";echo $? > exit_code)&
-tail -F typescript --pid=$!|| return 0
+tail -F ${SCRIPT_FILE} --pid=$!|| return 0
 exit $(cat exit_code)
