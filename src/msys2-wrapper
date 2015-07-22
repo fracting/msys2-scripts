@@ -3,7 +3,7 @@
 set -x
 set -o
 
-source /etc/msys2-env
+. /etc/msys2-env
 
 export MSYSTEM=MSYS
 export WINEDEBUG=fixme-all
