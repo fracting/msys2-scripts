@@ -10,6 +10,8 @@ command=$*
 export MSYSTEM=MSYS
 export WINEDEBUG=fixme-all
 
+cd ${MSYS_ROOT}
+
 SCRIPT_FILE=typescript
 EXIT_CODE=exit_code
 rm -f ${SCRIPT_FILE}
