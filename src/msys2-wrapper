@@ -8,8 +8,8 @@ set -x
 export MSYSTEM=MSYS
 export WINEDEBUG=fixme-all
 command=$*
-rm -f $MSYS_ROOT/$HOME/typescript
+rm -f ${MSYS_ROOT}${HOME}/typescript
 rm -f exit_code
 (wineconsole $MSYS_ROOT/usr/bin/bash.exe -l -e -c "script -q -f -e -c \"$command\"";echo $? > exit_code)&
-tail -f --retry --pid=$! $MSYS_ROOT/$HOME/typescript || return 0
+tail -f --retry --pid=$! ${MSYS_ROOT}${HOME}/typescript || return 0
 exit $(cat exit_code)

@@ -5,6 +5,12 @@ set -x
 
 msys2-install
 msys2-wrapper "echo restart"
+
+# Set ustc mirror
+echo "Server = http://mirrors.ustc.edu.cn/msys2/REPOS/MSYS2/\$arch" > ${MSYS_ROOT}/etc/pacman.d/mirrorlist.msys
+echo "Server = http://mirrors.ustc.edu.cn/msys2/REPOS/MINGW/i686" > ${MSYS_ROOT}/etc/pacman.d/mirrorlist.mingw32
+echo "Server = http://mirrors.ustc.edu.cn/msys2/REPOS/MINGW/x86_64" > ${MSYS_ROOT}/etc/pacman.d/mirrorlist.mingw64
+
 msys2-wrapper "pacman -Sy"
 msys2-wrapper "pacman -S --needed --noconfirm msys2-runtime pacman pacman-mirrors"
 msys2-wrapper "pacman -Sy"
@@ -14,10 +20,10 @@ msys2-wrapper "pacman -S --needed --noconfirm msys2-devel base-devel"
 # replace msys2 xz by mingw32 xz, workaround wine-staging bug 241 - https://bugs.wine-staging.com/show_bug.cgi?id=241
 echo replace msys2 xz by mingw32 xz, workaround wine-staging bug 241
 msys2-wrapper "pacman -S --needed --noconfirm mingw-w64-i686-xz"
-sed -i 's/xz -c -z -T0 -/\/mingw32\/bin\/xz -c -z -T0 -/' $MSYS_ROOT/etc/makepkg.conf
-sed -i 's/xz -c -z -T0 -/\/mingw32\/bin\/xz -c -z -T0 -/' $MSYS_ROOT/etc/makepkg_mingw32.conf
-sed -i 's/xz -c -z -T0 -/\/mingw32\/bin\/xz -c -z -T0 -/' $MSYS_ROOT/etc/makepkg_mingw64.conf
+sed -i 's/xz -c -z -T0 -/\/mingw32\/bin\/xz -c -z -T0 -/' ${MSYS_ROOT}/etc/makepkg.conf
+sed -i 's/xz -c -z -T0 -/\/mingw32\/bin\/xz -c -z -T0 -/' ${MSYS_ROOT}/etc/makepkg_mingw32.conf
+sed -i 's/xz -c -z -T0 -/\/mingw32\/bin\/xz -c -z -T0 -/' ${MSYS_ROOT}/etc/makepkg_mingw64.conf
 
 # replace msys2 xz by mingw32 xz, workaround wine-staging bug 394 - https://bugs.wine-staging.com/show_bug.cgi?id=394
 echo replace msys2 xz by mingw32 xz, workaround wine-staging bug 394
-sed -i 's/xz -d -c/\/mingw32\/bin\/xz -d -c/' $MSYS_ROOT/usr/bin/autopoint
+sed -i 's/xz -d -c/\/mingw32\/bin\/xz -d -c/' ${MSYS_ROOT}/usr/bin/autopoint
