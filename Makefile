@@ -44,7 +44,7 @@ cleanup:
 
 install:
 	$(INSTALL) -d $(DESTDIR)$(PREFIX)/bin
-	$(INSTALL_PROGRAM) src/msys2-installer $(DESTDIR)$(PREFIX)/bin/msys2-installer
+	$(INSTALL_PROGRAM) src/msys2-install $(DESTDIR)$(PREFIX)/bin/msys2-install
 	$(INSTALL_PROGRAM) src/msys2-wrapper $(DESTDIR)$(PREFIX)/bin/msys2-wrapper
 	$(INSTALL) -d $(DESTDIR)/etc
 	$(INSTALL_PROGRAM) src/msys2-env $(DESTDIR)/etc/msys2-env
