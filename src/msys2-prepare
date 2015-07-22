@@ -19,6 +19,8 @@ msys2-wrapper "pacman -Sy"
 msys2-wrapper "pacman -Su --noconfirm"
 msys2-wrapper "pacman -S --needed --noconfirm msys2-devel base-devel"
 
+msys2-wrapper "pacman -S --needed --noconfirm wget"
+
 # replace msys2 xz by mingw32 xz, workaround wine-staging bug 241 - https://bugs.wine-staging.com/show_bug.cgi?id=241
 echo replace msys2 xz by mingw32 xz, workaround wine-staging bug 241
 msys2-wrapper "pacman -S --needed --noconfirm mingw-w64-i686-xz"
