@@ -1,0 +1,25 @@
+Source: msys2-scripts
+Priority: optional
+Maintainer: Qian Hong <fracting@gmail.com>
+Standards-Version: 3.8.1
+Build-Depends: debhelper,
+        cabextract,
+        curl,
+        devscripts,
+        p7zip-full,
+        quilt,
+        unrar,
+        unzip
+
+Package: msys2-scripts
+Section: contrib/otherosfs
+Architecture: any
+Homepage: http://github.com/fracting
+Depends:
+        cabextract,
+        p7zip,
+        unzip,
+        wget,
+        wine,
+        xdg-utils
+Description: Simple tool to install and run msys2 on Wine.
