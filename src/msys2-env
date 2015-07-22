@@ -10,3 +10,12 @@ export STAGING_WRITECOPY=1
 
 # workaround wine staging bug 403
 export MSYS="winsymlinks=lnk"
+
+export MSYS_ROOT=msys32 # msys32 for 32bit msys2, msys64 for 64bit msys2
+
+if test "$WINEPREFIX"
+then
+    export WINEPREFIX="$WINEPREFIX"
+else
+    export WINEPREFIX="$HOME/.wine"
+fi
