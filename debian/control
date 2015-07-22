@@ -16,10 +16,6 @@ Section: contrib/otherosfs
 Architecture: any
 Homepage: http://github.com/fracting
 Depends:
-        cabextract,
-        p7zip,
-        unzip,
         wget,
-        wine,
-        xdg-utils
+        wine
 Description: Simple tool to install and run msys2 on Wine.
