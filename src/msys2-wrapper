@@ -11,5 +11,5 @@ command=$*
 rm -f ${MSYS_ROOT}${HOME}/typescript
 rm -f exit_code
 (wineconsole $MSYS_ROOT/usr/bin/bash.exe -l -e -c "script -q -f -e -c \"$command\"";echo $? > exit_code)&
-tail -f --pid=$! ${MSYS_ROOT}${HOME}/typescript --retry || return 0
+tail -F ${MSYS_ROOT}${HOME}/typescript --pid=$!|| return 0
 exit $(cat exit_code)
