@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -x
+set -o
+
+source /etc/msys2-env
+
+export MSYSTEM=MSYS
+export WINEDEBUG=fixme-all
+(wineconsole $MSYS_ROOT/usr/bin/bash.exe -l -e -c "script -q -f -e $@";status=$?)&
+tail -f --pid=$! typescript
+return $status
