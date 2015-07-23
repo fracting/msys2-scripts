@@ -18,6 +18,9 @@ fi
 SCRIPT_FILE=typescript.$$
 EXIT_CODE=exit_code.$$
 
+# emulate travis_wait
+(for i in {0..60}; do echo timestamp:$i; sleep 60; done) &
+
 (wineconsole $MSYS_ROOT/usr/bin/script.exe ${SCRIPT_FILE} -q -f -e -c "/usr/bin/bash.exe -l -e -c \"$command\"" || echo $? > ${EXIT_CODE})&
 tail -F ${SCRIPT_FILE} --pid=$!|| return 0
 
