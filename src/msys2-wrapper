@@ -23,6 +23,7 @@ EXIT_CODE=exit_code.$$
 ALIVE_PING=$!
 
 (wineconsole $MSYS_ROOT/usr/bin/script.exe ${SCRIPT_FILE} -q -f -e -c "/usr/bin/bash.exe -l -e -c \"$command\"" || echo $? > ${EXIT_CODE})&
+echo \$ $command
 tail -F ${SCRIPT_FILE} --pid=$! 2> /dev/null || return 0
 
 rm -f ${SCRIPT_FILE}
@@ -36,4 +37,4 @@ then
     exit $(cat ${EXIT_CODE})
 fi
 
-echo msys2-wrapper executed \'$command\' successfully!
+echo msys2-wrapper executed \`$command\` successfully!
