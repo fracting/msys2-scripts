@@ -21,4 +21,4 @@ then
 fi
 
 cd $WINEPREFIX/drive_c
-tar xf ${MSYS2_CACHE}/{$MSYS2_INSTALLER}
+tar xf ${MSYS2_CACHE}/${MSYS2_INSTALLER}
