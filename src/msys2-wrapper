@@ -15,15 +15,19 @@ then
     cd ${MSYS_ROOT}${HOME}
 fi
 
-SCRIPT_FILE=typescript
-EXIT_CODE=exit_code
-rm -f ${SCRIPT_FILE}
-rm -f ${EXIT_CODE}
+SCRIPT_FILE=typescript.$$
+EXIT_CODE=exit_code.$$
 
-(wineconsole $MSYS_ROOT/usr/bin/script.exe -q -f -e -c "/usr/bin/bash.exe -l -e -c \"$command\"" || echo $? > ${EXIT_CODE})&
+(wineconsole $MSYS_ROOT/usr/bin/script.exe ${SCRIPT_FILE} -q -f -e -c "/usr/bin/bash.exe -l -e -c \"$command\"" || echo $? > ${EXIT_CODE})&
 tail -F ${SCRIPT_FILE} --pid=$!|| return 0
+
+rm -f ${SCRIPT_FILE}
 
 if test -f ${EXIT_CODE}
 then
+    # clean up
+    rm -f ${EXIT_CODE}
     exit $(cat ${EXIT_CODE})
 fi
+
+echo msys2-wrapper executed $command successfully!
