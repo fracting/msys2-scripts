@@ -23,8 +23,12 @@ EXIT_CODE=exit_code.$$
 ALIVE_PING=$!
 
 (wineconsole $MSYS_ROOT/usr/bin/script.exe ${SCRIPT_FILE} -q -f -e -c "/usr/bin/bash.exe -l -e -c \"$command\"" || echo $? > ${EXIT_CODE})&
+echo Entering MSYS2 shell
+# Emulate MSYS2 command line prompt
+echo ${USER}@${HOSTNAME} ${MSYSTEM} \~
 echo \$ $command
 tail -F ${SCRIPT_FILE} --pid=$! 2> /dev/null || return 0
+echo Leaving MSYS2 shell
 
 rm -f ${SCRIPT_FILE}
 
