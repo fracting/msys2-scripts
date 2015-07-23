@@ -31,9 +31,9 @@ msys2-wrapper "pacman -S --needed --noconfirm wget"
 echo replace msys2 xz by mingw32 xz, workaround wine-staging bug 241
 msys2-wrapper "pacman -S --needed --noconfirm mingw-w64-i686-xz"
 msys2-wrapper "pacman -S --needed --noconfirm mingw-w64-i686-xz"
-sed -i 's/xz -c -z -T0 -/\/mingw32\/bin\/xz -c -z -T0 -/' ${MSYS_ROOT}/etc/makepkg.conf
-sed -i 's/xz -c -z -T0 -/\/mingw32\/bin\/xz -c -z -T0 -/' ${MSYS_ROOT}/etc/makepkg_mingw32.conf
-sed -i 's/xz -c -z -T0 -/\/mingw32\/bin\/xz -c -z -T0 -/' ${MSYS_ROOT}/etc/makepkg_mingw64.conf
+sed -i 's/xz -c -z -T0 -/xz -c -z -T1 -/' ${MSYS_ROOT}/etc/makepkg.conf
+sed -i 's/xz -c -z -T0 -/xz -c -z -T1 -/' ${MSYS_ROOT}/etc/makepkg_mingw32.conf
+sed -i 's/xz -c -z -T0 -/xz -c -z -T1 -/' ${MSYS_ROOT}/etc/makepkg_mingw64.conf
 
 # replace msys2 xz by mingw32 xz, workaround wine-staging bug 394 - https://bugs.wine-staging.com/show_bug.cgi?id=394
 echo replace msys2 xz by mingw32 xz, workaround wine-staging bug 394
