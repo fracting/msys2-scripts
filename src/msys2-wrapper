@@ -27,6 +27,8 @@ tail -F ${SCRIPT_FILE} --pid=$!|| return 0
 
 rm -f ${SCRIPT_FILE}
 
+kill -9 ${ALIVE_PING}
+
 if test -f ${EXIT_CODE}
 then
     # clean up
@@ -34,5 +36,4 @@ then
     exit $(cat ${EXIT_CODE})
 fi
 
-kill -9 ${ALIVE_PING}
 echo msys2-wrapper executed $command successfully!
