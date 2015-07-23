@@ -38,3 +38,6 @@ sed -i 's/xz -c -z -T0 -/xz -c -z -T1 -/' ${MSYS_ROOT}/etc/makepkg_mingw64.conf
 # replace msys2 xz by mingw32 xz, workaround wine-staging bug 394 - https://bugs.wine-staging.com/show_bug.cgi?id=394
 echo replace msys2 xz by mingw32 xz, workaround wine-staging bug 394
 sed -i 's/xz -d -c/\/mingw32\/bin\/xz -d -c/' ${MSYS_ROOT}/usr/bin/autopoint
+
+# disable autom4te flock, workaround wine staging bug in travis ci old kernel.
+sed -i "s/flock_implemented = 'yes'/flock_implemented = 'no'/" ${MSYS_ROOT}/usr/bin/autom4te
