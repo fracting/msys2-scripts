@@ -20,6 +20,7 @@ EXIT_CODE=exit_code.$$
 
 # emulate travis_wait
 (for i in {0..60}; do echo timestamp:$i; sleep 60; done) &
+ALIVE_PING=$!
 
 (wineconsole $MSYS_ROOT/usr/bin/script.exe ${SCRIPT_FILE} -q -f -e -c "/usr/bin/bash.exe -l -e -c \"$command\"" || echo $? > ${EXIT_CODE})&
 tail -F ${SCRIPT_FILE} --pid=$!|| return 0
@@ -33,4 +34,5 @@ then
     exit $(cat ${EXIT_CODE})
 fi
 
+kill -9 ${ALIVE_PING}
 echo msys2-wrapper executed $command successfully!
