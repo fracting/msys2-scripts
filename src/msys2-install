@@ -7,6 +7,18 @@ set -x
 
 DISPLAY=:88.0 WINEDEBUG=-all wineboot # hack - wineboot without display, create wineprefix in a quick way, workaround Travis CI timeout (FIXME)
 
+MSYS2_CACHE=~/.cache/msys2
+if ! test -d ${MSYS2_CACHE}
+then
+    mkdir -p ${MSYS2_CACHE}
+fi
+
+MSYS2_INSTALLER=msys2-base-i686-20150512.tar.xz
+
+if ! test -f ${MSYS2_CACHE}/${MSYS2_INSTALLER}
+then
+    wget http://sourceforge.net/projects/msys2/files/Base/i686/${MSYS2_INSTALLER}
+fi
+
 cd $WINEPREFIX/drive_c
-wget http://sourceforge.net/projects/msys2/files/Base/i686/msys2-base-i686-20150512.tar.xz
-tar xf msys2-base-*.tar.xz
+tar xf ${MSYS2_CACHE}/{$MSYS2_INSTALLER}
