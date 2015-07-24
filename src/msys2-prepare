@@ -8,12 +8,14 @@ set -e
 msys2-install
 msys2-wrapper "echo restart"
 
+set -x
 # make a symbolic link from unix $HOME to msys2 $HOME
 if test ${MSYS_ROOT} && ! test -L ${MSYS_ROOT}${HOME}
 then
     mv -v ${MSYS_ROOT}${HOME} ${MSYS_ROOT}${HOME}.bak
     ln -sfv ${HOME} ${MSYS_ROOT}${HOME}
 fi
+set +x
 
 # Set ustc mirror
 #echo "Server = http://mirrors.ustc.edu.cn/msys2/REPOS/MSYS2/\$arch" >> ${MSYS_ROOT}/etc/pacman.d/mirrorlist.msys
