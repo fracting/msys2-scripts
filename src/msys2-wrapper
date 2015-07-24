@@ -19,7 +19,7 @@ SCRIPT_FILE=typescript.$$
 EXIT_CODE=exit_code.$$
 
 # emulate travis_wait
-(for i in {0..60}; do echo timestamp:$i; sleep 60; done) &
+(for i in {1..60}; do sleep 60; echo timestamp:$i; done) &
 ALIVE_PING=$!
 
 (wineconsole $MSYS_ROOT/usr/bin/script.exe ${SCRIPT_FILE} -q -f -e -c "/usr/bin/bash.exe -l -e -c \"$command\"" || echo $? > ${EXIT_CODE})&
