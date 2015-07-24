@@ -35,8 +35,11 @@ msys2-wrapper "pacman -Sy"
 msys2-wrapper "pacman -Sy"
 msys2-wrapper "pacman -Su --noconfirm"
 msys2-wrapper "pacman -Su --noconfirm"
-msys2-wrapper "pacman -S --needed --noconfirm msys2-devel base-devel"
-msys2-wrapper "pacman -S --needed --noconfirm msys2-devel base-devel"
+msys2-wrapper "pacman -S --needed --noconfirm msys2-devel base-devel git"
+msys2-wrapper "pacman -S --needed --noconfirm msys2-devel base-devel git"
+
+msys2-wrapper "git config --global --add user.name \"MSYS2 Travis Bot\""
+msys2-wrapper "git config --global --add user.email \"MSYS2@DUMMY.MAIL\""
 
 msys2-wrapper "pacman -S --needed --noconfirm wget"
 msys2-wrapper "pacman -S --needed --noconfirm wget"
