@@ -47,3 +47,10 @@ sed -i 's/xz -d -c/\/mingw32\/bin\/xz -d -c/' ${MSYS_ROOT}/usr/bin/autopoint
 
 # disable autom4te flock, workaround wine staging bug 466 in travis ci old kernel - https://bugs.wine-staging.com/show_bug.cgi?id=466
 sed -i "s/flock_implemented = 'yes'/flock_implemented = 'no'/" ${MSYS_ROOT}/usr/bin/autom4te
+
+# make a symbolic link from unix $HOME to msys2 $HOME
+if test ${MSYS_ROOT} && ! test -L ${MSYS_ROOT}${HOME}
+then
+    mv -v ${MSYS_ROOT}${HOME} ${MSYS_ROOT}${HOME}.bak
+    ln -sfv ${HOME} ${MSYS_ROOT}${HOME}
+fi
