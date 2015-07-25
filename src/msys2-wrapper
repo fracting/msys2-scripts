@@ -22,7 +22,7 @@ EXIT_CODE=exit_code.$$
 (for i in {1..60}; do sleep 60; echo timestamp:$i; done) &
 ALIVE_PING=$!
 
-(wineconsole $MSYS_ROOT/usr/bin/script.exe ${SCRIPT_FILE} -q -f -e -c "/usr/bin/bash.exe -l -e -c \"$command\"" || echo $? > ${EXIT_CODE})&
+(wineconsole $MSYS_ROOT/usr/bin/script.exe ${SCRIPT_FILE} -q -f -e -c "/usr/bin/bash.exe -l -x -e -c \"($command || echo \\\$? > ${EXIT_CODE})\"") &
 echo
 echo "Entering MSYS2 shell >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 # Emulate MSYS2 command line prompt
@@ -41,7 +41,8 @@ then
     # clean up
     exit_code=$(cat ${EXIT_CODE})
     rm -f ${EXIT_CODE}
+    echo msys2-wrapper executed \`$command\` failed with exit code ${exit_code}.
     exit ${exit_code}
 fi
 
-echo msys2-wrapper executed \`$command\` successfully!
+echo msys2-wrapper executed \`$command\` successfully.
