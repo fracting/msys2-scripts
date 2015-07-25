@@ -28,27 +28,21 @@ echo "Server = http://45.59.69.178/mingw/i686" > ${MSYS_ROOT}/etc/pacman.d/mirro
 echo "Server = http://45.59.69.178/mingw/x86_64" > ${MSYS_ROOT}/etc/pacman.d/mirrorlist.mingw64
 
 msys2-wrapper "pacman -Sy"
-msys2-wrapper "pacman -Sy"
 msys2-wrapper "pacman -S --needed --noconfirm msys2-runtime pacman pacman-mirrors"
-msys2-wrapper "pacman -S --needed --noconfirm msys2-runtime pacman pacman-mirrors"
-msys2-wrapper "pacman -Sy"
+
 msys2-wrapper "pacman -Sy"
 msys2-wrapper "pacman -Su --noconfirm"
-msys2-wrapper "pacman -Su --noconfirm"
-msys2-wrapper "pacman -S --needed --noconfirm msys2-devel base-devel git"
 msys2-wrapper "pacman -S --needed --noconfirm msys2-devel base-devel git"
 
-msys2-wrapper "git config --global --add user.name \"MSYS2 Travis Bot\""
+msys2-wrapper "git config --global --add user.name \"MSYS2 Travis Bot\"" || echo FIXME git config fail
 msys2-wrapper "git config --global --add user.email \"MSYS2@DUMMY.MAIL\""
 
 msys2-wrapper "pacman -S --needed --noconfirm wget"
-msys2-wrapper "pacman -S --needed --noconfirm wget"
 
-msys2-wrapper "pacman -S --needed --noconfirm mingw-w64-i686-xz"
 msys2-wrapper "pacman -S --needed --noconfirm mingw-w64-i686-xz"
 
 # replace xz -T0 by xz -T1, workaround wine-staging bug 241 - https://bugs.wine-staging.com/show_bug.cgi?id=241
-echo replace msys2 xz by mingw32 xz, workaround wine-staging bug 241
+echo replace xz -T0 by xz -T1, workaround wine-staging bug 241
 sed -i 's/xz -c -z -T0 -/xz -c -z -T1 -/' ${MSYS_ROOT}/etc/makepkg.conf
 sed -i 's/xz -c -z -T0 -/xz -c -z -T1 -/' ${MSYS_ROOT}/etc/makepkg_mingw32.conf
 sed -i 's/xz -c -z -T0 -/xz -c -z -T1 -/' ${MSYS_ROOT}/etc/makepkg_mingw64.conf
