@@ -39,8 +39,9 @@ kill -9 ${ALIVE_PING}
 if test -f ${EXIT_CODE}
 then
     # clean up
+    exit_code=$(cat ${EXIT_CODE})
     rm -f ${EXIT_CODE}
-    exit $(cat ${EXIT_CODE})
+    exit ${exit_code}
 fi
 
 echo msys2-wrapper executed \`$command\` successfully!
