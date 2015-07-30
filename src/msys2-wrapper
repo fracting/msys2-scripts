@@ -34,7 +34,10 @@ echo
 
 rm -f ${SCRIPT_FILE}
 
-kill -9 ${ALIVE_PING}
+if test -d /proc/${ALIVE_PING}
+then
+    kill -9 ${ALIVE_PING}
+fi
 
 if test -f ${EXIT_CODE}
 then
