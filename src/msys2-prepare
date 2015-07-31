@@ -60,3 +60,8 @@ sed -i 's/xz -d -c/\/mingw32\/bin\/xz -d -c/' ${MSYS_ROOT}/usr/bin/autopoint
 
 # disable autom4te flock, workaround wine staging bug 466 in travis ci old kernel - https://bugs.wine-staging.com/show_bug.cgi?id=466
 sed -i "s/flock_implemented = 'yes'/flock_implemented = 'no'/" ${MSYS_ROOT}/usr/bin/autom4te
+
+# replace mingw msgmerge and msgfmt by msys2 msgmerge and msgfmt, workaround wine staging bug 485 - https://bugs.wine-staging.com/show_bug.cgi?id=485
+msys2-wrapper "pacman -S --needed --noconfirm mingw-w64-i686-gettext"
+msys2-wrapper "cp /usr/bin/msgmerge.exe /mingw32/bin/msgmerge.exe"
+msys2-wrapper "cp /usr/bin/msgfmt.exe /mingw32/bin/msgfmt.exe"
