@@ -18,7 +18,7 @@ MSYS2_INSTALLER=msys2-base-i686-20150512.tar.xz
 if ! test -f ${MSYS2_CACHE}/${MSYS2_INSTALLER}
 then
     cd ${MSYS2_CACHE}
-    wget http://mirrors.ustc.edu.cn/msys2/Base/i686/${MSYS2_INSTALLER}
+    wget --inet4-only http://mirrors4.ustc.edu.cn/msys2/Base/i686/${MSYS2_INSTALLER}
 fi
 
 cd $WINEPREFIX/drive_c
