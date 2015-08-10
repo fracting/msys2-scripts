@@ -74,6 +74,7 @@ then
     exit_code=$(cat ${EXIT_CODE})
     rm -f ${EXIT_CODE}
     echo msys2-shell executed \`$COMMAND\` failed with exit code ${exit_code}.
+    echo
     exit ${exit_code}
 fi
 
