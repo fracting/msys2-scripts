@@ -47,5 +47,6 @@ install:
 	$(INSTALL_PROGRAM) src/msys2-install $(DESTDIR)$(PREFIX)/bin/msys2-install
 	$(INSTALL_PROGRAM) src/msys2-shell $(DESTDIR)$(PREFIX)/bin/msys2-shell
 	$(INSTALL_PROGRAM) src/msys2-init $(DESTDIR)$(PREFIX)/bin/msys2-init
+	$(INSTALL_PROGRAM) src/msys2-pack $(DESTDIR)$(PREFIX)/bin/msys2-pack
 	$(INSTALL) -d $(DESTDIR)/etc
 	$(INSTALL_PROGRAM) src/msys2-env $(DESTDIR)/etc/msys2-env
