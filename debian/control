@@ -14,7 +14,7 @@ Build-Depends: debhelper,
 Package: msys2-scripts
 Section: contrib/otherosfs
 Architecture: any
-Homepage: http://github.com/fracting
+Homepage: https://github.com/fracting/msys2-scripts
 Depends:
         wget,
         wine

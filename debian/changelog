@@ -1,3 +1,10 @@
+msys2-scripts (20150810) lucid; urgency=low
+
+  * New command line interface.
+
+ -- Qian Hong <fracting@gmail.com>  Tue, 10 Aug 2015 15:48:11 +0800
+
+
 msys2-scripts (20150804) lucid; urgency=low
 
   * Switch to mirrors4.ustc.edu.cn.
