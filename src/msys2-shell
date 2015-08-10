@@ -78,3 +78,4 @@ then
 fi
 
 echo msys2-shell executed \`$COMMAND\` successfully.
+echo
