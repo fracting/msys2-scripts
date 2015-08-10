@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]
+then
+    echo Usage: $0
+    echo Download msys2 installer, install to Wine, workaround several Wine bugs.
+fi
+
 set -e
 #set -x
 

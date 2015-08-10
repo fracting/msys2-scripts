@@ -13,12 +13,7 @@ then
     mkdir -p ${MSYS2_CACHE}
 fi
 
-if [ ${MSYS_ARCH} = "i686" ]
-then
-    MSYS2_INSTALLER=msys2-base-i686-20150512.tar.xz
-else
-    MSYS2_INSTALLER=msys2-base-x86_64-20150512.tar.xz
-fi
+MSYS2_INSTALLER=msys2-base-${MSYS_ARCH}-${MSYS_VER}.tar.xz
 
 if ! test -f ${MSYS2_CACHE}/${MSYS2_INSTALLER}
 then

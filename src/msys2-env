@@ -39,3 +39,5 @@ then
 else
     export MSYS_ROOT=${WINEPREFIX}/drive_c/msys64
 fi
+
+export MSYS_VER=20150512
