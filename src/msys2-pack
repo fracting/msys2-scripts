@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+set -e
 
 . /etc/msys2-env
 
@@ -17,10 +17,9 @@ DEB_VER=$1
 rm -rf ${MSYS_ROOT}/var/cache/pacman/pkg/*
 
 cd ${MSYS_ROOT}/..
-NEW_MSYS2_PACKAGE=msys2-${MSYS_VER}_${DEB_VER}_${MSYS_ARCH}
-tar zcf ${NEW_MSYS2_PACKAGE}.tar.gz `basename ${MSYS_ROOT}`
+NEW_MSYS2_PACKAGE=msys2-pack-${MSYS_VER}_${DEB_VER}_${MSYS_ARCH}
+tar zcf ${HOME}/${NEW_MSYS2_PACKAGE}.tar.gz `basename ${MSYS_ROOT}`
 
-mv ${NEW_MSYS2_PACKAGE}.tar.gz ~
 cd ~
 echo "shasum:"
 sha1sum ${NEW_MSYS2_PACKAGE}.tar.gz
