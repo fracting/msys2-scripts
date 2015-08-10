@@ -8,20 +8,6 @@ set -e
 msys2-install
 msys2-shell -c "echo restart"
 
-set -x
-# make a symbolic link from unix $HOME to msys2 $HOME
-if test ${MSYS_ROOT} && ! test -L ${MSYS_ROOT}${HOME}
-then
-    mv -v ${MSYS_ROOT}${HOME} ${MSYS_ROOT}${HOME}.bak
-    ln -sfv ${HOME} ${MSYS_ROOT}${HOME}
-fi
-set +x
-
-# Set ustc mirror
-#echo "Server = http://mirrors.ustc.edu.cn/msys2/REPOS/MSYS2/\$arch" >> ${MSYS_ROOT}/etc/pacman.d/mirrorlist.msys
-#echo "Server = http://mirrors.ustc.edu.cn/msys2/REPOS/MINGW/i686" >> ${MSYS_ROOT}/etc/pacman.d/mirrorlist.mingw32
-#echo "Server = http://mirrors.ustc.edu.cn/msys2/REPOS/MINGW/x86_64" >> ${MSYS_ROOT}/etc/pacman.d/mirrorlist.mingw64
-
 # Set new msys2 mirror
 echo "Server = http://repo.msys2.org/msys/\$arch" > ${MSYS_ROOT}/etc/pacman.d/mirrorlist.msys
 echo "Server = http://repo.msys2.org/mingw/i686" > ${MSYS_ROOT}/etc/pacman.d/mirrorlist.mingw32
@@ -46,7 +32,6 @@ git config --global --add user.email "MSYS2@DUMMY.MAIL"
 
 msys2-shell -c "pacman -S --needed --noconfirm wget"
 
-msys2-shell -c "pacman -S --needed --noconfirm mingw-w64-i686-xz"
 
 # replace xz -T0 by xz -T1, workaround wine-staging bug 241 - https://bugs.wine-staging.com/show_bug.cgi?id=241
 echo replace xz -T0 by xz -T1, workaround wine-staging bug 241
@@ -54,14 +39,29 @@ sed -i 's/xz -c -z -T0 -/xz -c -z -T1 -/' ${MSYS_ROOT}/etc/makepkg.conf
 sed -i 's/xz -c -z -T0 -/xz -c -z -T1 -/' ${MSYS_ROOT}/etc/makepkg_mingw32.conf
 sed -i 's/xz -c -z -T0 -/xz -c -z -T1 -/' ${MSYS_ROOT}/etc/makepkg_mingw64.conf
 
-# replace msys2 xz by mingw32 xz, workaround wine-staging bug 394 - https://bugs.wine-staging.com/show_bug.cgi?id=394
-echo replace msys2 xz by mingw32 xz, workaround wine-staging bug 394
-sed -i 's/xz -d -c/\/mingw32\/bin\/xz -d -c/' ${MSYS_ROOT}/usr/bin/autopoint
+# replace msys2 xz by mingw xz, workaround wine-staging bug 394 - https://bugs.wine-staging.com/show_bug.cgi?id=394
+if [ ${MSYS_ARCH} = "i686" ]
+then
+    msys2-shell -c "pacman -S --needed --noconfirm mingw-w64-i686-xz"
+    echo replace msys2 xz by mingw32 xz, workaround wine-staging bug 394
+    sed -i 's/xz -d -c/\/mingw32\/bin\/xz -d -c/' ${MSYS_ROOT}/usr/bin/autopoint
+else
+    msys2-shell -c "pacman -S --needed --noconfirm mingw-w64-x86_64-xz"
+    echo replace msys2 xz by mingw64 xz, workaround wine-staging bug 394
+    sed -i 's/xz -d -c/\/mingw64\/bin\/xz -d -c/' ${MSYS_ROOT}/usr/bin/autopoint
+fi
 
 # disable autom4te flock, workaround wine staging bug 466 in travis ci old kernel - https://bugs.wine-staging.com/show_bug.cgi?id=466
 sed -i "s/flock_implemented = 'yes'/flock_implemented = 'no'/" ${MSYS_ROOT}/usr/bin/autom4te
 
 # replace mingw msgmerge and msgfmt by msys2 msgmerge and msgfmt, workaround wine staging bug 485 - https://bugs.wine-staging.com/show_bug.cgi?id=485
-msys2-shell -c "pacman -S --needed --noconfirm mingw-w64-i686-gettext"
-msys2-shell -c "cp /usr/bin/msgmerge.exe /mingw32/bin/msgmerge.exe"
-msys2-shell -c "cp /usr/bin/msgfmt.exe /mingw32/bin/msgfmt.exe"
+if [ ${MSYS_ARCH} = "i686" ]
+then
+    msys2-shell -c "pacman -S --needed --noconfirm mingw-w64-i686-gettext"
+    msys2-shell -c "cp /usr/bin/msgmerge.exe /mingw32/bin/msgmerge.exe"
+    msys2-shell -c "cp /usr/bin/msgfmt.exe /mingw32/bin/msgfmt.exe"
+else
+    msys2-shell -c "pacman -S --needed --noconfirm mingw-w64-x86_64-gettext"
+    msys2-shell -c "cp /usr/bin/msgmerge.exe /mingw64/bin/msgmerge.exe"
+    msys2-shell -c "cp /usr/bin/msgfmt.exe /mingw64/bin/msgfmt.exe"
+fi
