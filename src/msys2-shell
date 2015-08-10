@@ -3,6 +3,14 @@
 set -e
 #set -x
 
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]
+then
+    echo  Usage:  $0 "-c commandline"
+    echo "      " $0 "script-file"
+    echo "      " $0
+    exit
+fi
+
 . /etc/msys2-env
 
 export MSYSTEM=MSYS

@@ -2,14 +2,35 @@
 
 if [ "$1" = "-h" ] || [ "$1" = "--help" ]
 then
-    echo Usage: $0
+    echo Usage: $0 '[--cache URL]'
     echo Download msys2 installer, install to Wine, workaround several Wine bugs.
+    exit
 fi
 
 set -e
 #set -x
 
 . /etc/msys2-env
+
+if test -d ${MSYS_ROOT}
+then
+    echo Already inited?
+    exit 1
+fi
+
+if [ "$1" = "--cache" ]
+then
+    MSYS_URL=$2
+    echo use cache from ${MSYS_URL}
+
+    MSYS_BOTTLE=msys2_bottle.tar.gz
+    cd ${MSYS_ROOT}/..
+    wget ${MSYS_URL} -k ${MSYS_BOTTLE}
+    tar zxf ${MSYS_BOTTLE}
+
+    msys2-shell -c "echo restart"
+    exit
+fi
 
 msys2-install
 msys2-shell -c "echo restart"
