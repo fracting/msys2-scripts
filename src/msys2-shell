@@ -20,34 +20,32 @@ EXIT_CODE=exit_code.$$
 (for i in {1..60}; do sleep 60; echo timestamp:$i; done) &
 ALIVE_PING=$!
 
+UNIXPWD=`pwd`
+WINPWD=`winepath -w ${UNIXPWD}`
+
 echo
 echo "Entering MSYS2 shell >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 
 if [ "$#" = "0" ]
 then
-    (wineconsole $MSYS_ROOT/usr/bin/script.exe ${SCRIPT_FILE} -q -f -e -c "/usr/bin/bash.exe -l") &
+    (wineconsole $MSYS_ROOT/usr/bin/script.exe ${SCRIPT_FILE} -q -f -e -c "/usr/bin/bash.exe -l -c \"cd \\\"${WINPWD}\\\"; bash\"") &
 elif [ "$1" = "-c" ]
 then
     COMMAND=${@:2}
-    (wineconsole $MSYS_ROOT/usr/bin/script.exe ${SCRIPT_FILE} -q -f -e -c "/usr/bin/bash.exe -l -c \"(bash -e -c \\\"${COMMAND}\\\"|| echo \\\$? > ${EXIT_CODE})\"") &
+    (wineconsole $MSYS_ROOT/usr/bin/script.exe ${SCRIPT_FILE} -q -f -e -c "/usr/bin/bash.exe -l -c \"(cd \\\"${WINPWD}\\\"; bash -e -c \\\"${COMMAND}\\\"|| echo \\\$? > ${EXIT_CODE})\"") &
     # Emulate MSYS2 COMMAND line prompt
-    echo ${USER}@${HOSTNAME} ${MSYSTEM} \~
+    echo ${USER}@${HOSTNAME} ${MSYSTEM} ${WINPWD}
     echo \$ ${COMMAND}
-
 else
-    pwd
     pushd `dirname $1` > /dev/null
     UNIXPATH=`pwd`
     popd > /dev/null
     WINPATH=`winepath -w ${UNIXPATH}`
     COMMAND=${WINPATH}\\`basename $1`
-
-    (wineconsole $MSYS_ROOT/usr/bin/script.exe ${SCRIPT_FILE} -q -f -e -c "/usr/bin/bash.exe -l -c \"(bash -e \\\"${COMMAND}\\\" || echo \\\$? > ${EXIT_CODE})\"") &
-
+    (wineconsole $MSYS_ROOT/usr/bin/script.exe ${SCRIPT_FILE} -q -f -e -c "/usr/bin/bash.exe -l -c \"(cd \\\"${WINPWD}\\\"; bash -e \\\"${COMMAND}\\\" || echo \\\$? > ${EXIT_CODE})\"") &
     # Emulate MSYS2 COMMAND line prompt
-    echo ${USER}@${HOSTNAME} ${MSYSTEM} \~
+    echo ${USER}@${HOSTNAME} ${MSYSTEM} ${WINPWD}
     echo \$ ${COMMAND}
-
 fi
 
 tail -F ${SCRIPT_FILE} --pid=$! 2> /dev/null || return 0
