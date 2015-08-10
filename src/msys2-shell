@@ -3,6 +3,8 @@
 set -e
 #set -x
 
+exec 2<&-
+
 if [ "$1" = "-h" ] || [ "$1" = "--help" ]
 then
     echo  Usage:  $0 "-c commandline"
