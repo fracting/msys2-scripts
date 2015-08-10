@@ -60,7 +60,6 @@ fi
 
 tail -F ${SCRIPT_FILE} --pid=$! 2> /dev/null || return 0
 echo "Leaving MSYS2 shell <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-echo
 
 rm -f ${SCRIPT_FILE}
 
