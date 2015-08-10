@@ -94,3 +94,10 @@ else
     msys2-shell -c "cp /usr/bin/msgmerge.exe /mingw64/bin/msgmerge.exe"
     msys2-shell -c "cp /usr/bin/msgfmt.exe /mingw64/bin/msgfmt.exe"
 fi
+
+# install mingw toolchain.
+msys2-shell -c "pacman -S --needed --noconfirm mingw-w64-i686-toolchain"
+if [ ${MSYS_ARCH} = "x86_64" ]
+then
+    msys2-shell -c "pacman -S --needed --noconfirm mingw-w64-x86_64-toolchain"
+fi
