@@ -26,7 +26,7 @@ then
     echo use cache from ${MSYS_URL}
 
     MSYS_BOTTLE=msys2_bottle.tar.gz
-    cd ${MSYS_ROOT}/..
+    cd ${WINEPREFIX}/drive_c
     wget ${MSYS_URL} -O ${MSYS_BOTTLE}
     tar zxf ${MSYS_BOTTLE}
 
