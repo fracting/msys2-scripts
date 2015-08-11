@@ -18,9 +18,11 @@ rm -rf ${MSYS_ROOT}/var/cache/pacman/pkg/*
 
 cd ${MSYS_ROOT}/..
 NEW_MSYS2_PACKAGE=msys2-pack-${MSYS_VER}_${DEB_VER}_${MSYS_ARCH}
-tar zcf ${HOME}/${NEW_MSYS2_PACKAGE}.tar.gz `basename ${MSYS_ROOT}`
+MSYS2_PACK_DIR=${HOME}/msys2-pack
+mkdir ${MSYS2_PACK_DIR}
+tar zcf ${MSYS2_PACK_DIR}/${NEW_MSYS2_PACKAGE}.tar.gz `basename ${MSYS_ROOT}`
 
-cd ~
+cd ${MSYS2_PACK_DIR}
 echo "shasum:"
 sha1sum ${NEW_MSYS2_PACKAGE}.tar.gz
 ls
