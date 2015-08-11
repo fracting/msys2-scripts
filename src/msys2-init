@@ -26,10 +26,11 @@ then
     echo use cache from ${MSYS_URL}
 
     MSYS_BOTTLE=msys2_bottle.tar.gz
-    cd ${WINEPREFIX}/drive_c
+    pushd ${WINEPREFIX}/drive_c > /dev/null
     wget ${MSYS_URL} -O ${MSYS_BOTTLE}
     tar zxf ${MSYS_BOTTLE}
 
+    popd > /dev/null
     msys2-shell -c "echo restart"
     exit
 fi
