@@ -23,7 +23,7 @@ MSYS2_INSTALLER=msys2-base-${MSYS_ARCH}-${MSYS_VER}.tar.xz
 if ! test -f ${MSYS2_CACHE}/${MSYS2_INSTALLER}
 then
     cd ${MSYS2_CACHE}
-    wget --inet4-only http://mirrors4.ustc.edu.cn/msys2/Base/${MSYS_ARCH}/${MSYS2_INSTALLER}
+    wget --inet4-only https://s3.amazonaws.com/fracting/msys2/Base/${MSYS_ARCH}/${MSYS2_INSTALLER}
 fi
 
 cd $WINEPREFIX/drive_c
