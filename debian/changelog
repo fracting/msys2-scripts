@@ -1,3 +1,10 @@
+msys2-scripts (20150811) lucid; urgency=low
+
+  * Update msys2 package directory.
+
+ -- Qian Hong <fracting@gmail.com>  Tue, 11 Aug 2015 15:48:11 +0800
+
+
 msys2-scripts (20150810) lucid; urgency=low
 
   * New command line interface.
