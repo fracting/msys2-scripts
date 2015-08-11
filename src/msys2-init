@@ -27,7 +27,7 @@ then
 
     MSYS_BOTTLE=msys2_bottle.tar.gz
     cd ${MSYS_ROOT}/..
-    wget ${MSYS_URL} -k ${MSYS_BOTTLE}
+    wget ${MSYS_URL} -O ${MSYS_BOTTLE}
     tar zxf ${MSYS_BOTTLE}
 
     msys2-shell -c "echo restart"
