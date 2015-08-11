@@ -32,6 +32,7 @@ ALIVE_PING=$!
 
 UNIXPWD=`pwd`
 WINPWD=`winepath -w ${UNIXPWD}`
+WINPWD=${WINPWD//\\/\/} # replace \ to /
 
 echo
 echo "Entering MSYS2 shell >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
