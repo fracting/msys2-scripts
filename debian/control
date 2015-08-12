@@ -2,14 +2,7 @@ Source: msys2-scripts
 Priority: optional
 Maintainer: Qian Hong <fracting@gmail.com>
 Standards-Version: 3.8.1
-Build-Depends: debhelper,
-        cabextract,
-        curl,
-        devscripts,
-        p7zip-full,
-        quilt,
-        unrar,
-        unzip
+Build-Depends: debhelper
 
 Package: msys2-scripts
 Section: contrib/otherosfs
