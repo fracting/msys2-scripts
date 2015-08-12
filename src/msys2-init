@@ -18,7 +18,8 @@ then
     exit 1
 fi
 
-DISPLAY=:88.0 WINEDEBUG=-all wineboot # hack - wineboot without display, create wineprefix in a quick way, workaround Travis CI timeout (FIXME)
+echo running wineboot ...
+DISPLAY=:88.0 WINEDEBUG=-all wineboot 2> /dev/null # hack - wineboot without display, create wineprefix in a quick way, workaround Travis CI timeout (FIXME)
 
 if [ "$1" = "--cache" ]
 then
