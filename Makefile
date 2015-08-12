@@ -8,7 +8,7 @@
 # GNU Lesser Public License version 2.1, as published by the Free Software
 # Foundation. Please see the file src/COPYING for details.
 #
-# Web Page: http://github.com/fracting
+# Web Page: http://github.com/fracting/msys2-scripts
 #
 # Maintainer:
 # Qian Hong <fracting@gmail.com>
