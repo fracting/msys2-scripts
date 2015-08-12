@@ -28,7 +28,8 @@ install:
   - sudo apt-get install -y --install-recommends wine-staging wine-staging-compat
   - sudo apt-get install -y --install-recommends dpkg-dev
   - dpkg-buildpackage -b -us -uc
-  - sudo dpkg -i ../*.deb
+  - DEB_DIR=`pwd`/..
+  - sudo dpkg -i ${DIB_DIR}/*.deb
     #  - MSYS2_SCRIPTS_DEB=msys2-scripts_20150811_all.deb
     #  - wget https://s3.amazonaws.com/fracting/msys2/pack/${MSYS2_SCRIPTS_DEB}
     #  - sudo dpkg -i ${MSYS2_SCRIPTS_DEB}
@@ -43,7 +44,7 @@ script:
   - msys2-shell -c "makepkg -s -f --noconfirm --skippgpcheck ${NOCHECK}"
 
 after_success:
-  - cp ../*.deb ${HOME}/msys2-pack
+  - cp ${DIB_DIR}/*.deb ${HOME}/msys2-pack
 
 deploy:
   provider: s3
