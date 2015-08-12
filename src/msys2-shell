@@ -3,7 +3,7 @@
 set -e
 set -x
 
-exec 2<&-
+#exec 2<&-
 
 if [ "$1" = "-h" ] || [ "$1" = "--help" ]
 then
