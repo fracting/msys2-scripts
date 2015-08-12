@@ -54,4 +54,4 @@ deploy:
   acl: public_read
   local_dir: ${HOME}/msys2-pack
   on:
-    condition: "${DEPLOY}" = true
+    condition: ${DEPLOY} = true
