@@ -54,7 +54,7 @@ echo "Server = http://repo.msys2.org/mingw/x86_64" > ${MSYS_ROOT}/etc/pacman.d/m
 
 msys2-shell -c "pacman -Sy"
 msys2-shell -c "pacman -Su --noconfirm"
-msys2-shell -c "pacman -S --needed --noconfirm msys2-devel base-devel git"
+msys2-shell -c "pacman -S --needed --noconfirm msys2-devel base-devel git svn"
 
 # msys2-shell -c "git config --global --add user.name \"MSYS2 Travis Bot\" || echo FIXME git config fail"
 # msys2-shell -c "git config --global --add user.email \"MSYS2@DUMMY.MAIL\""
